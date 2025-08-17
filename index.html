@@ -1,25 +1,441 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-    <title>إحصائيات فريق - 365Scores</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ibn Hattuta Travels | رحلات ابن حتوطة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+        
+        :root {
+            --primary: #1a5d1a;
+            --secondary: #f8b400;
+            --dark: #222831;
+            --light: #f5f5f5;
+            --accent: #ff6b6b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1368&q=80') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1.5s ease;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.5s ease;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .about {
+            padding: 100px 20px;
+            background-color: white;
+            position: relative;
+        }
+        
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23f5f5f5" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23f5f5f5" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23f5f5f5"/></svg>') no-repeat;
+            background-size: cover;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--secondary);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+        
+        .links {
+            padding: 100px 20px;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+        
+        .links::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23ffffff" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23ffffff" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23f9f9f9"/></svg>') no-repeat;
+            background-size: cover;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 50px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: white;
+            color: var(--dark);
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .social-link.facebook { color: #3b5998; }
+        .social-link.instagram { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); color: white; }
+        .social-link.twitter { color: #1da1f2; }
+        .social-link.youtube { color: #ff0000; }
+        .social-link.tiktok { color: #000000; }
+        .social-link.snapchat { color: #fffc00; background-color: #000; }
+        
+        .contact {
+            padding: 100px 20px;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+        }
+        
+        .contact .section-title {
+            color: white;
+        }
+        
+        .contact .section-title::after {
+            background-color: var(--secondary);
+        }
+        
+        .contact-info {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .email-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        
+        .email-link:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 1rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .stat-item {
+                width: 50%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .stat-item {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<h2>إحصائيات فريق برشلونة</h2>
-
-<div data-widget-type="entityScores" 
-     data-entity-type="team" 
-     data-entity-id="132" 
-     data-lang="ar" 
-     data-widget-id="70f6ecaa-4207-42ef-9812-16247c400965" 
-     data-theme="dark">
-</div>
-
-<div id="powered-by">
-    <a id="powered-by-link" href="https://www.365scores.com/ar" target="_blank">365Scores.com</a> مزود من
-</div>
-
-<script src="https://widgets.365scores.com/main.js"></script>
-
+    <section class="hero">
+        <h1>Ibn Hattuta Travels</h1>
+        <p>نسافر لنستعيد الأمل الذي فقدناه، الأمل بالإنسان، بعد أن فرّقتنا السياسات والحكومات ووسائل الإعلام</p>
+        <a href="https://www.ibnhattuta.com/" class="cta-button">اكتشف الرحلات</a>
+    </section>
+    
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title">من نحن</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>مرحبا، أنا قاسم الحتو، أهلا فيكم في مدونة ترحالي ✈️ بدأت رحلتي حول العالم سنة ٢٠١٧ تقريبا، حبّيت أتعرف على الشعوب والثقافات المختلفة جميعها.</p>
+                    <p>مصادر دخلي كانت محدودة جدا، فوجدت الكثير من طرق السفر بأقل التكاليف وشاركتها معكم ⛺️ وحاليا هدفي أشارك معكم فيديوهات من كل دول العالم 🌎</p>
+                    <p>نسافر لنكون أقرب من الشعوب، أقرب من الحقيقة، أقرب للسعادة، أقرب لنا نحن.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Ibn Hattuta Travels">
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">3.05M</div>
+                    <div class="stat-label">مشترك</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">390</div>
+                    <div class="stat-label">فيديو</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">384M</div>
+                    <div class="stat-label">مشاهدة</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2017</div>
+                    <div class="stat-label">بداية الرحلة</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="links">
+        <div class="container">
+            <h2 class="section-title">تواصل معنا</h2>
+            <div class="social-links">
+                <a href="https://www.instagram.com/ibnhattuta" class="social-link instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/ibnhattuta" class="social-link facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/ibnhattuta" class="social-link twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.youtube.com/@IBNHATTUTA" class="social-link youtube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@ibnhattuta" class="social-link tiktok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://story.snapchat.com/p/44eeea7e-1982-4994-88d5-878656ff7aac/1822089331902464" class="social-link snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">للتواصل التجاري</h2>
+            <div class="contact-info">
+                <p>للتعاون أو الاستفسارات التجارية</p>
+                <a href="mailto:info@ibnhattuta.com" class="email-link">info@ibnhattuta.com</a>
+            </div>
+            <p>الأردن | تاريخ الانضمام: 13‏/04‏/2016</p>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 Ibn Hattuta Travels. جميع الحقوق محفوظة.</p>
+            <p>أسست مجتمع صغير للرحالة العرب على فيسبوك، مجموعة مسافرون بلا حدود</p>
+            <a href="https://www.facebook.com/groups/travelerswithoutborders" style="color: var(--secondary); text-decoration: none;">انضم إلى المجموعة</a>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.about-content, .stats, .social-links').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
